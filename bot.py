@@ -5,7 +5,7 @@ import yt_dlp
 import os
 
 # የቦት ቶከን
-bot = telebot.TeleBot("8405392398:AAFcN5SpNwH3rRkHLFUZgPyEQ9LUq94UfzM")
+bot = telebot.TeleBot("8405392398:AAEqWcijEq2YGmUlqlIoyrJmGMTQA7aqOCQ")
 user_last_greeted = {}
 
 def get_greeting(hour):
