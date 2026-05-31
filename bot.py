@@ -26,13 +26,14 @@ def handle_link(message):
     msg = bot.reply_to(message, "✈️ ቪዲዮሽን በርሬ ሄጄ ላምጣ፣ ጥቂት ሰከንድ ጠብቂኝ! 🕒✨")
     
     try:
+        # የቴሌግራምን ጨምሮ ሁሉንም እንዲያወርድ የተስተካከለ ቅንብር
         ydl_opts = {
-            'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+            'format': 'best',
             'outtmpl': f'video_{chat_id}.mp4',
             'noplaylist': True,
             'quiet': True,
             'no_warnings': True,
-            'merge_output_format': 'mp4'
+            'geo_bypass': True,
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
