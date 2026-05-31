@@ -6,8 +6,8 @@ import os
 
 # የቦት ቶከን
 bot = telebot.TeleBot("8405392398:AAEqWcijEq2YGmUlqlIoyrJmGMTQA7aqOCQ")
-user_last_greeted = {}
 
+# ሰላምታ ተግባር
 def get_greeting(hour):
     if 5 <= hour < 12:
         return random.choice(["እንዴት አደርሽ የኔ ልዕልት! 😍", "ደህና አደርሽ የኔ ውድ! ❤️", "ጠዋትሽ እንደ ፀሐይ ይደምቅ የኔ ቆንጆ፣ ምን ልታዘዝልሽ? 💖"])
@@ -26,26 +26,27 @@ def handle_link(message):
     msg = bot.reply_to(message, "✈️ ቪዲዮሽን በርሬ ሄጄ ላምጣ፣ ጥቂት ሰከንድ ጠብቂኝ! 🕒✨")
     
     try:
-        # የቴሌግራምን ጨምሮ ሁሉንም እንዲያወርድ የተስተካከለ ቅንብር
+        # ለተለያዩ ሊንኮች የተሻለ አሰራር
         ydl_opts = {
             'format': 'best',
             'outtmpl': f'video_{chat_id}.mp4',
-            'noplaylist': True,
             'quiet': True,
             'no_warnings': True,
-            'geo_bypass': True,
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([message.text])
         
         video_path = f'video_{chat_id}.mp4'
-        with open(video_path, 'rb') as video:
-            bot.send_video(chat_id, video, supports_streaming=True)
         
-        bot.send_message(chat_id, "ይሄው የኔ ልዕልት! 😍")
-        os.remove(video_path)
-        
+        if os.path.exists(video_path):
+            with open(video_path, 'rb') as video:
+                bot.send_video(chat_id, video, supports_streaming=True)
+            bot.send_message(chat_id, "ይሄው የኔ ልዕልት! 😍")
+            os.remove(video_path)
+        else:
+            bot.reply_to(message, "ይህንን ቪዲዮ ማውረድ አልቻልኩም። ሌላ ሊንክ ሞክሪ። 😢")
+            
     except Exception:
         bot.reply_to(message, "አልተሳካም፣ ሊንኩን እንደገና ሞክሪ! 😢")
 
