@@ -4,8 +4,9 @@ import random
 import yt_dlp
 import os
 
-# የቦት ቶከን
-8405392398:AAGi-0-6V0YY3Xtcy1ar5ckAqT9XkTCiSsc
+# አዲሱ የተስተካከለ የቦት ቶከን
+API_TOKEN = "8405392398:AAGfR7L-slAGLzEbAGBNasd3rM_F_favig0"
+bot = telebot.TeleBot(API_TOKEN)
 
 # ሰላምታ ተግባር
 def get_greeting(hour):
@@ -26,7 +27,6 @@ def handle_link(message):
     msg = bot.reply_to(message, "✈️ ቪዲዮሽን በርሬ ሄጄ ላምጣ፣ ጥቂት ሰከንድ ጠብቂኝ! 🕒✨")
     
     try:
-        # ለተለያዩ ሊንኮች የተሻለ አሰራር
         ydl_opts = {
             'format': 'best',
             'outtmpl': f'video_{chat_id}.mp4',
